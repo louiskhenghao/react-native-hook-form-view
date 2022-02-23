@@ -1,0 +1,124 @@
+import React from "react";
+import { useController } from "react-hook-form";
+import { CloneElement } from "../CloneElement";
+import { FallbackView } from "../FallbackView";
+import { useNativeFormViewContext } from "../../context/NativeFormView";
+import {
+  StyledFormItemWrapper,
+  StyledFormItemLabel,
+  StyledFormItemCaption,
+  StyledFormItemError
+} from "../../styles";
+import { Props } from "./props";
+
+const FormItemView: React.FC<Props> = (props) => {
+  const {
+    label,
+    name,
+    control,
+    disabled,
+    caption,
+    rules,
+    initialValue,
+    children,
+    render,
+    constructErrorMessage
+  } = props;
+
+  // ================ HOOKS
+  const views = useNativeFormViewContext();
+  const { field, fieldState, formState } = useController({
+    name,
+    control,
+    rules,
+    defaultValue: initialValue
+  });
+
+  // ================ VARIABLESs
+  const { error } = fieldState;
+  const styles = views?.styles;
+
+  // ================ VIEWS
+  return (
+    <FallbackView
+      view={views?.item}
+      fallbackView={StyledFormItemWrapper}
+      props={{ style: styles?.item }}
+      customRenderView={
+        views?.renderItem
+          ? (context) =>
+              views?.renderItem?.({
+                props: context,
+                fieldState
+              })
+          : undefined
+      }>
+      {label && (
+        <FallbackView
+          view={views?.label}
+          fallbackView={StyledFormItemLabel}
+          props={{ style: styles?.label }}
+          customRenderView={
+            views?.renderLabel
+              ? (context) =>
+                  views?.renderLabel?.({
+                    props: context,
+                    fieldState
+                  })
+              : undefined
+          }>
+          {label}
+        </FallbackView>
+      )}
+
+      {render ? (
+        render({ field, fieldState, formState })
+      ) : (
+        <CloneElement disabled={disabled} {...field}>
+          {children}
+        </CloneElement>
+      )}
+
+      {caption && (
+        <FallbackView
+          view={views?.caption}
+          fallbackView={StyledFormItemCaption}
+          props={{ style: styles?.caption }}
+          customRenderView={
+            views?.renderCaption
+              ? (context) =>
+                  views?.renderCaption?.({
+                    props: context,
+                    fieldState
+                  })
+              : undefined
+          }>
+          {caption}
+        </FallbackView>
+      )}
+
+      {!!error && (
+        <FallbackView
+          view={views?.error}
+          fallbackView={StyledFormItemError}
+          props={{ style: styles?.error }}
+          customRenderView={
+            views?.renderError
+              ? (context) =>
+                  views?.renderError?.({
+                    props: context,
+                    fieldState
+                  })
+              : undefined
+          }>
+          {constructErrorMessage?.(fieldState) ?? error?.message ?? error?.type}
+        </FallbackView>
+      )}
+    </FallbackView>
+  );
+};
+
+export type FormItemProps<T = any> = Props<T>;
+export const FormItem = FormItemView;
+
+export default FormItem;

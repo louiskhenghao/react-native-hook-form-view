@@ -1,0 +1,15 @@
+*/.bit
+*/.bitmap
+*/dist
+*/node_modules
+
+node_modules
+dist
+.bit
+.bitmap
+
+.DS_Store
+*/.DS_Store
+
+*.log
+*/*.log
