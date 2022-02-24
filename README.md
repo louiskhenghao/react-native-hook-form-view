@@ -2,6 +2,12 @@
 
 This component is high level component that leverage features of [react-hook-form](https://react-hook-form.com/). The objective of this component is to helps developer to create form in React Native/Web easily.
 
+**Highlight**
+
+1. Customizable style & view
+2. Easy form validation (leverage on react-hook-form)
+3. Support React Native Web
+
 ---
 
 # Table of contents
@@ -10,14 +16,19 @@ This component is high level component that leverage features of [react-hook-for
 - [Getting Started](#getting-started)
   - [Simple Usage](#simple-usage)
   - [Advanced Usage](#advanced-usage)
+- [Future Roadmap](#future-roadmap)
+- [Changelog](#changelog)
 
 ---
 
 # Installation
 
 ```bash
-yarn add react-native-hook-form-view # using yarn
-npm install react-native-hook-form-view # using npm
+# using yarn
+yarn add react-native-hook-form-view
+
+# using npm
+npm install react-native-hook-form-view
 ```
 
 ---
@@ -28,7 +39,7 @@ npm install react-native-hook-form-view # using npm
 
 ```TypeScript
 import React, { useRef } from "react";
-import { TextInput, View, Button, Switch } from "react-native";
+import { TextInput, Button } from "react-native";
 import { Form, FormItem, FormRefProps } from "react-native-hook-form-view";
 
 const Example: React.FC = () => {
@@ -50,6 +61,7 @@ const Example: React.FC = () => {
         rules={{
           required: "First name is required"
         }}
+        caption="some caption to highlight"
         render={({ field: { onChange, value } }) => (
           <TextInput value={value} onChangeText={onChange} />
         )}
@@ -64,7 +76,7 @@ const Example: React.FC = () => {
         }}
         render={({ field: { onChange, value } }) => (
           // render custom component to handle value, onChange, onBlur, etc manually
-          <Switch value={value} onChangeText={onChange} /> // <-- can
+          <TextInput value={value} onChangeText={onChange} />
         )}
       />
 
@@ -98,17 +110,20 @@ Below is the preview of above example
 
 ### Validation with `yup`
 
-Prerequisite: Install below packages to your project with command below
+Prerequisite: Install packages to your project with command below
 
 ```bash
-yarn add yup @hookform/resolvers/yup # yarn
-npm install yup @hookform/resolvers/yup # npm
+# yarn
+yarn add yup @hookform/resolvers/yup
+
+# npm
+npm install yup @hookform/resolvers/yup
 ```
 
-Always refer to offical documentation if you want to explore more about yup. The example below will just be showing minimal working example of how to validate your form with `yup`.
+Always refer to offical documentation for more advanced usage & details. The example below will just be showing minimal working example of how to validate your form with `yup`.
 
-1. For `react-hook-form` resolvers usage please checkout the offical [github](https://github.com/react-hook-form/resolvers#quickstart)
-2. For `yup` validation API please checkout the official [github](https://github.com/jquense/yup#usage)
+1. For `react-hook-form` resolvers, please refer to [offical github](https://github.com/react-hook-form/resolvers#quickstart)
+2. For `yup` validation API please refer to [official github](https://github.com/jquense/yup#usage)
 
 ```TypeScript
 import React from "react";
@@ -272,7 +287,7 @@ margin-top: 4px;
 
 #### Custom styling
 
-Please be aware that if you specified any style for particular view just like example below, it will actually overwrite the default styling.
+Please be aware that if you specified any style for particular view just like example below, it will actually overwrite its default styling.
 
 ```TypeScript
 import { NativeFormViewProvider } from 'react-native-hook-form-view';
@@ -307,7 +322,7 @@ const YourApp: React.FC = () => {
 
 #### Custom View
 
-You can have your preferred custom component for specific view. For example below, I'll use [styled-components](https://styled-components.com/docs/basics#react-native) as my custom component
+You can have your preferred custom component for specific view. For example below, I'll be using [styled-components](https://styled-components.com/docs/basics#react-native) as my custom component
 
 ```TypeScript
 import styled from 'styled-components/native';
@@ -446,3 +461,36 @@ const YourComponent: React.FC = () => {
 ```
 
 **Note:** By using `useNativeFormContext` hook, please make sure your component is wrapped under `Form` or `NativeFormContextProvider` else you will get error.
+
+---
+
+# Future Roadmap
+
+In near future, will support more preset input from React Native by default. Ideally just passing `type` as one of the props of `FormItem`.
+
+```TypeScript
+import { FormItem } from 'react-native-hook-form-view';
+
+<FormItem type="input" name="firstName" />
+<FormItem type="date" name="dob" />
+<FormItem type="textarea" name="description" />
+```
+
+- [ ] TextInput
+- [ ] DateInput
+- [ ] Checkbox
+- [ ] TextArea
+- [ ] Switch
+- etc
+
+---
+
+# Changelog
+
+### 0.0.1
+
+- Update docs
+
+### 0.0.0
+
+- initial release
