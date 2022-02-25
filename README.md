@@ -16,6 +16,7 @@ This component is high level component that leverage features of [react-hook-for
 - [Getting Started](#getting-started)
   - [Simple Usage](#simple-usage)
   - [Advanced Usage](#advanced-usage)
+- [Props](#props)
 - [Future Roadmap](#future-roadmap)
 - [Changelog](#changelog)
 
@@ -91,9 +92,9 @@ const Example: React.FC = () => {
 
 Below is the preview of above example
 
-| Normal                                     | Validated                                  |
-| ------------------------------------------ | ------------------------------------------ |
-| ![Generated Component](./docs/preview.png) | ![Validate](./docs/preview-validation.png) |
+| Normal                                                                                                       | Validated                                                                                                                  |
+| ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| ![Normal](https://raw.githubusercontent.com/louiskhenghao/react-native-hook-form-view/main/docs/preview.png) | ![Validated](https://raw.githubusercontent.com/louiskhenghao/react-native-hook-form-view/main/docs/preview-validation.png) |
 
 ---
 
@@ -114,10 +115,10 @@ Prerequisite: Install packages to your project with command below
 
 ```bash
 # yarn
-yarn add yup @hookform/resolvers/yup
+yarn add yup @hookform/resolvers
 
 # npm
-npm install yup @hookform/resolvers/yup
+npm install yup @hookform/resolvers
 ```
 
 Always refer to offical documentation for more advanced usage & details. The example below will just be showing minimal working example of how to validate your form with `yup`.
@@ -283,6 +284,16 @@ margin-top: 4px;
 </tr>
 </table>
 
+#### The layout structure
+
+![Layout structure](https://raw.githubusercontent.com/louiskhenghao/react-native-hook-form-view/main/docs/layout.png)
+
+- Orange: `container` / `renderContainer`
+- Purple: `item` / `renderItem`
+- Green: `label` / `renderLabel`
+- Cyan: `caption` / `renderCaption`
+- Red: `error` / `renderError`
+
 ---
 
 #### Custom styling
@@ -322,7 +333,7 @@ const YourApp: React.FC = () => {
 
 #### Custom View
 
-You can have your preferred custom component for specific view. For example below, I'll be using [styled-components](https://styled-components.com/docs/basics#react-native) as my custom component
+You can have your preferred custom component for specific view. For example below I'll be using [styled-components](https://styled-components.com/docs/basics#react-native) as my custom component
 
 ```TypeScript
 import styled from 'styled-components/native';
@@ -461,6 +472,40 @@ const YourComponent: React.FC = () => {
 ```
 
 **Note:** By using `useNativeFormContext` hook, please make sure your component is wrapped under `Form` or `NativeFormContextProvider` else you will get error.
+
+---
+
+# Props
+
+## Form
+
+| Props      | Type                 | Value | Description                                                             |
+| ---------- | -------------------- | ----- | ----------------------------------------------------------------------- |
+| `ref`      | React Ref (optional) | -     | Ref to control form                                                     |
+| `options`  | object (optional)    | -     | Form options (checkout [here](https://react-hook-form.com/api/useform)) |
+| `onSubmit` | function (optional)  | -     | Callback function that return form values upon submit                   |
+
+## FormItem
+
+| Props                   | Type                                                                     | Value | Description                                                                                                                     |
+| ----------------------- | ------------------------------------------------------------------------ | ----- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                  | string                                                                   | -     | The input name                                                                                                                  |
+| `label`                 | string (optional)                                                        | -     | The label name for the input                                                                                                    |
+| `caption`               | string (optional)                                                        | -     | Caption of the input                                                                                                            |
+| `control`               | [Control](https://react-hook-form.com/api/usecontroller/controller#main) | -     | This object contains methods for registering components into React Hook Form.                                                   |
+| `rules`                 | object (https://react-hook-form.com/api/useform/register#options)        | -     | Validation rules                                                                                                                |
+| `disabled`              | boolean (optional)                                                       | false | To disabled input (only works if input component has `disabled` / `editable` props existed)                                     |
+| `initialValue`          | unknown (optional)                                                       | -     | initial value (take note on [`defaultValue`](https://react-hook-form.com/api/usecontroller) )                                   |
+| `render`                | function (optional)                                                      | -     | A function that returns a React element (checkout `render` in [here](https://react-hook-form.com/api/usecontroller/controller)) |
+| `constructErrorMessage` | function (optional)                                                      | -     | function to contruct error message                                                                                              |
+
+## NativeFormViewProvider
+
+Checkout the example as it shown all available props
+
+- [Custom Styling](#custom-styling)
+- [Custom View](#custom-view)
+- [Custom View (render function)](#custom-view-render-function)
 
 ---
 
