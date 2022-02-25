@@ -1,5 +1,5 @@
 import React, { createElement } from "react";
-import CloneElement from "../CloneElement";
+import { CloneElement } from "../CloneElement";
 import { Props } from "./props";
 
 export const FallbackView = <T,>(props: React.PropsWithChildren<Props<T>>) => {
@@ -8,8 +8,7 @@ export const FallbackView = <T,>(props: React.PropsWithChildren<Props<T>>) => {
     children,
     fallbackView,
     props: viewProps,
-    customRenderView,
-    constructProps
+    customRenderView
   } = props;
 
   // ======================= VIEW

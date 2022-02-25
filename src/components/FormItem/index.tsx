@@ -53,6 +53,7 @@ const FormItemView: React.FC<Props> = (props) => {
               })
           : undefined
       }>
+      {/* ====== LABEL */}
       {label && (
         <FallbackView
           view={views?.label}
@@ -71,14 +72,16 @@ const FormItemView: React.FC<Props> = (props) => {
         </FallbackView>
       )}
 
+      {/* ====== INPUT VIEW */}
       {render ? (
         render({ field, fieldState, formState })
       ) : (
-        <CloneElement disabled={disabled} {...field}>
+        <CloneElement disabled={disabled} editable={!disabled} {...field}>
           {children}
         </CloneElement>
       )}
 
+      {/* ====== CAPTION */}
       {caption && (
         <FallbackView
           view={views?.caption}
@@ -97,6 +100,7 @@ const FormItemView: React.FC<Props> = (props) => {
         </FallbackView>
       )}
 
+      {/* ====== ERROR */}
       {!!error && (
         <FallbackView
           view={views?.error}

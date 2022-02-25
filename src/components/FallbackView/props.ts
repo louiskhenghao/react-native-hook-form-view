@@ -5,5 +5,4 @@ export type Props<T = any> = {
   view?: FunctionComponent<T>;
   fallbackView?: FunctionComponent<T>;
   customRenderView?: (context: any) => ReactNode;
-  constructProps?: (props: T) => { [key: string]: any };
 };

@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, ReactElement, useContext } from "react";
 import { ContextProps } from "./props";
 
 export const NativeFormContext = createContext<ContextProps<any>>({});
@@ -15,7 +15,7 @@ export const useNativeFormContext = <T,>(): ContextProps<T> => {
 
 export const NativeFormContextProvider = <T,>(
   props: React.PropsWithChildren<ContextProps<T>>
-) => {
+): ReactElement => {
   const { children, ...restProps } = props;
   return (
     <NativeFormContext.Provider value={restProps}>

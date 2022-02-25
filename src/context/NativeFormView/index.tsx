@@ -11,9 +11,7 @@ export const useNativeFormViewContext = (): ContextProps | null => {
   return context;
 };
 
-export const NativeFormViewProvider = (
-  props: React.PropsWithChildren<ContextProps>
-) => {
+export const NativeFormViewProvider: React.FC<ContextProps> = (props) => {
   const { children, ...restProps } = props;
   return (
     <NativeFormViewContext.Provider value={restProps}>
