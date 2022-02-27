@@ -487,17 +487,17 @@ const YourComponent: React.FC = () => {
 
 ## FormItem
 
-| Props                   | Type                                                                     | Value | Description                                                                                                                     |
-| ----------------------- | ------------------------------------------------------------------------ | ----- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `name`                  | string                                                                   | -     | The input name                                                                                                                  |
-| `label`                 | string (optional)                                                        | -     | The label name for the input                                                                                                    |
-| `caption`               | string (optional)                                                        | -     | Caption of the input                                                                                                            |
-| `control`               | [Control](https://react-hook-form.com/api/usecontroller/controller#main) | -     | This object contains methods for registering components into React Hook Form.                                                   |
-| `rules`                 | object (https://react-hook-form.com/api/useform/register#options)        | -     | Validation rules                                                                                                                |
-| `disabled`              | boolean (optional)                                                       | false | To disabled input (only works if input component has `disabled` / `editable` props existed)                                     |
-| `initialValue`          | unknown (optional)                                                       | -     | initial value (take note on [`defaultValue`](https://react-hook-form.com/api/usecontroller) )                                   |
-| `render`                | function (optional)                                                      | -     | A function that returns a React element (checkout `render` in [here](https://react-hook-form.com/api/usecontroller/controller)) |
-| `constructErrorMessage` | function (optional)                                                      | -     | function to contruct error message                                                                                              |
+| Props                   | Type                                                                               | Value | Description                                                                                                                     |
+| ----------------------- | ---------------------------------------------------------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                  | string                                                                             | -     | The input name                                                                                                                  |
+| `label`                 | string (optional)                                                                  | -     | The label name for the input                                                                                                    |
+| `caption`               | string (optional)                                                                  | -     | Caption of the input                                                                                                            |
+| `control`               | [Control](https://react-hook-form.com/api/usecontroller/controller#main)(optional) | -     | This object contains methods for registering components into React Hook Form.                                                   |
+| `rules`                 | object (optional)                                                                  | -     | Validation rules. Checkout [here](https://react-hook-form.com/api/useform/register#options)                                     |
+| `disabled`              | boolean (optional)                                                                 | false | To disabled input (only works if input component has `disabled` / `editable` props existed)                                     |
+| `initialValue`          | unknown (optional)                                                                 | -     | initial value (take note on [`defaultValue`](https://react-hook-form.com/api/usecontroller) )                                   |
+| `render`                | function (optional)                                                                | -     | A function that returns a React element (checkout `render` in [here](https://react-hook-form.com/api/usecontroller/controller)) |
+| `constructErrorMessage` | function (optional)                                                                | -     | function to contruct error message                                                                                              |
 
 ## NativeFormViewProvider
 
@@ -511,7 +511,7 @@ Checkout the example as it shown all available props
 
 # Future Roadmap
 
-In near future, will support more preset input from React Native by default. Ideally just passing `type` as one of the props of `FormItem`.
+In near future, will support more preset input from React Native by default. Ideally just passing `type` as one of the props from `FormItem`.
 
 ```TypeScript
 import { FormItem } from 'react-native-hook-form-view';
@@ -526,6 +526,7 @@ import { FormItem } from 'react-native-hook-form-view';
 - [ ] Checkbox
 - [ ] TextArea
 - [ ] Switch
+- [ ] Fields definition with Object
 - etc
 
 ---
