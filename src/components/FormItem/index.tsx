@@ -34,7 +34,7 @@ const FormItemView: React.FC<Props> = (props) => {
     defaultValue: initialValue
   });
 
-  // ================ VARIABLESs
+  // ================ VARIABLES
   const { error } = fieldState;
   const styles = views?.styles;
 

@@ -49,7 +49,9 @@ const FormComponentView = <T, F extends FieldValues>(
   // ================ VIEWS
   return (
     <FormProvider {...form}>
-      <NativeFormContextProvider<T, F> form={form}>
+      <NativeFormContextProvider<T, F>
+        form={form}
+        submitHandler={onHandleSubmit}>
         <FallbackView<ViewProps>
           view={views?.container}
           fallbackView={StyledFormContainer}
@@ -81,15 +83,21 @@ const FormComponentView = <T, F extends FieldValues>(
   );
 };
 
-const FormView = forwardRef(FormComponentView) as <T>(
-  props: React.PropsWithChildren<Props<T>> & {
-    ref?: React.ForwardedRef<RefProps<T>>;
+const FormView = forwardRef(FormComponentView) as <
+  T,
+  F extends FieldValues = FieldValues
+>(
+  props: React.PropsWithChildren<Props<T, F>> & {
+    ref?: React.ForwardedRef<RefProps<T, F>>;
   }
 ) => ReturnType<typeof FormComponentView>;
 
 // ================ EXPORTS
-export type FormProps<T> = Props<T>;
-export type FormRefProps<T = any> = RefProps<T>;
+export type FormProps<T, F extends FieldValues = FieldValues> = Props<T, F>;
+export type FormRefProps<
+  T = any,
+  F extends FieldValues = FieldValues
+> = RefProps<T, F>;
 export const Form = FormView;
 
 export default FormView;
