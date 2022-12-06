@@ -191,7 +191,7 @@ const SignInForm: React.FC = () => {
       />
 
       {/* latest usage since v0.0.2 */}
-      <Submit >
+      <Submit />
     </Form>
   );
 };
@@ -421,6 +421,16 @@ export const CustomFormItemError = styled.Text`
   color: white;
 `;
 
+export const CustomSubmitButton = (props) => {
+  // please use `onPress` from `props` in order to trigger form submission
+  // or use `useNativeFormContext`, check out "Access form context" for more info
+  return (
+    <Pressable {...props} style={{ backgroundColor: "red", padding: 20 }}>
+      <Text>Submit</Text>
+    </Pressable>
+  );
+};
+
 const YourApp: React.FC = () => {
   return (
     <NativeFormViewProvider
@@ -429,7 +439,7 @@ const YourApp: React.FC = () => {
       label={CustomFormItemLabel}
       caption={CustomFormItemCaption}
       error={CustomFormItemError}
-      submit={<Button color="#06b6d4" title="Custom Submit"} />} // added on v0.0.2
+      submit={CustomSubmitButton} // added on v0.0.2
     >
       {/* YOUR COMPONENT*/}
     </NativeFormViewProvider>
@@ -520,7 +530,7 @@ const YourComponent: React.FC = () => {
 
   // example to add form submission triggering
   const triggerSubmitAnywhere = () => {
-    form.handleSubmit(submitHandler)
+    form.handleSubmit(submitHandler)()
   }
 
   // do something with the variables above
