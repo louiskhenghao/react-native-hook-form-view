@@ -34,7 +34,7 @@ const FormComponentView = <T, F extends FieldValues>(
   } = form;
 
   // ================ EVENTS
-  const onHandleSubmit = (values: any) => {
+  const onHandleSubmit = (values: F) => {
     onSubmit?.(values);
   };
 
