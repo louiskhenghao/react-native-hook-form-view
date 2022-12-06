@@ -5,7 +5,8 @@ import {
   TextProps,
   TextStyle,
   ViewProps,
-  ViewStyle
+  ViewStyle,
+  PressableProps
 } from "react-native";
 
 export type ContextProps = {
@@ -49,7 +50,7 @@ export type ContextProps = {
     fieldState: ControllerFieldState;
   }) => ReactNode;
   renderSubmit?: (context: {
-    props: ViewProps;
+    props: PressableProps;
     formState: FormState<any>;
   }) => ReactNode;
 };

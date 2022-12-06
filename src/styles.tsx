@@ -52,6 +52,8 @@ export const StyledFormItemError = styled.Text`
  */
 export const StyledPressable = styled.Pressable`
   margin-top: 4px;
+  padding-vertical: 12px;
+  padding-horizontal: 32px;
 `;
 
 /**
@@ -59,7 +61,7 @@ export const StyledPressable = styled.Pressable`
  */
 export const StyleButtonSubmit: React.FC<ActionButtonProps> = (props) => {
   const {
-    title,
+    title = "Submit",
     style,
     children,
     titleStyle,
@@ -75,7 +77,12 @@ export const StyleButtonSubmit: React.FC<ActionButtonProps> = (props) => {
       const isFunc = typeof style === "function";
       const applyStyle = isFunc ? style(stateProps) : style;
       return [
-        { opacity: pressed ? 0.5 : 1, backgroundColor: color },
+        {
+          opacity: pressed ? 0.5 : 1,
+          backgroundColor: color,
+          alignItems: "center",
+          justifyContent: "center"
+        },
         applyStyle
       ];
     },
@@ -86,7 +93,7 @@ export const StyleButtonSubmit: React.FC<ActionButtonProps> = (props) => {
   return (
     <StyledPressable style={composeStyle} {...restProps}>
       {children ?? (
-        <Text style={titleStyle ?? { color: "#fff", fontSize: 12 }}>
+        <Text style={titleStyle ?? { color: "#fff", fontSize: 20 }}>
           {title}
         </Text>
       )}
