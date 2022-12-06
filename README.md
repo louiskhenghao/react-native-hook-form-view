@@ -41,11 +41,13 @@ npm install react-native-hook-form-view
 ```TypeScript
 import React, { useRef } from "react";
 import { TextInput, Button } from "react-native";
-import { Form, FormItem, FormRefProps } from "react-native-hook-form-view";
+import { Form, FormItem, FormRefProps, Submit } from "react-native-hook-form-view";
 
 const Example: React.FC = () => {
 
   // create ref
+  // NOTE: `formRef` previously used for form submission purpose,
+  // since v0.0.2 can use `Submit` component within `Form`
   const formRef = useRef<FormRefProps>();
 
   // ======================= EVENTS
@@ -55,7 +57,12 @@ const Example: React.FC = () => {
 
   // ======================= VIEW
   return (
-    <Form ref={formRef} onSubmit={onSubmit}>
+    <Form
+      // NOTE: `formRef` previously used for form submission purpose,
+      // since v0.0.2 can use `Submit` component within `Form`
+      ref={formRef}
+      onSubmit={onSubmit}
+    >
       <FormItem
         label="First Name"
         name="firstName"
@@ -81,9 +88,15 @@ const Example: React.FC = () => {
         )}
       />
 
+      {/* legacy usage, can use `Submit` component */}
       <Button
         title="Submit"
         onPress={() => formRef.current?.submit()}
+      />
+
+      {/* latest usage since v0.0.2 */}
+      <Submit
+        title="Custom Text"
       />
     </Form>
   );
@@ -132,7 +145,7 @@ import * as yup from 'yup';
 import { useForm } from "react-hook-form";
 import { TextInput, View } from "react-native";
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Form, FormItem, useNativeFormContext } from "react-native-hook-form-view";
+import { Form, FormItem, Submit } from "react-native-hook-form-view";
 
 type InputPayload = {
   email: string;
@@ -148,9 +161,6 @@ const schema = yup.object().shape({
 
 const SignInForm: React.FC = () => {
 
-  // create ref with type
-  const formRef = useRef<FormRefProps<InputPayload>>(null)
-
   // ======================= EVENTS
   const onSubmit = (values: InputPayload) => {
     // do somethoing with `values`
@@ -158,8 +168,7 @@ const SignInForm: React.FC = () => {
 
   // ======================= VIEW
   return (
-    <Form
-      ref={formRef}
+    <Form<any, InputPayload>
       options={{
         resolver: yupResolver(schema)
       }}
@@ -181,10 +190,8 @@ const SignInForm: React.FC = () => {
         )}
       />
 
-      <Button
-        title="Submit"
-        onPress={() => formRef.current?.submit()}
-      />
+      {/* latest usage since v0.0.2 */}
+      <Submit >
     </Form>
   );
 };
@@ -212,7 +219,7 @@ Custom View (render function) > Custom Styling > Custom View
 Note: Please refer the table below for description & style for each view
 
 <table width="100%">
-<tr><td> View </td> <td> Description </td><td> Style Type </td><td> Default Style </td></tr>
+<tr><td> View </td> <td> Description </td><td> Style Type </td><td> Default Style </td><td>Release</td></tr>
 <tr>
   <td> container </td>
   <td> Form container </td>
@@ -224,7 +231,11 @@ padding: 8px;
 ```
 
   </td>
+  <td>
+  v0.0.0
+  </td>
 </tr>
+
 <tr>
   <td> item </td>
   <td> Form item container </td>
@@ -236,7 +247,11 @@ padding: 8px;
 ```
 
   </td>
+  <td>
+  v0.0.0
+  </td>
 </tr>
+
 <tr>
   <td> label </td>
   <td> Form item label text view </td>
@@ -251,7 +266,11 @@ margin-bottom: 4px;
 ```
 
   </td>
+  <td>
+  v0.0.0
+  </td>
 </tr>
+
 <tr>
   <td> caption </td>
   <td> Form item caption text view </td>
@@ -266,7 +285,11 @@ margin-top: 4px;
 ```
 
   </td>
+  <td>
+  v0.0.0
+  </td>
 </tr>
+
 <tr>
   <td> error </td>
   <td> Form item error text view </td>
@@ -281,7 +304,28 @@ margin-top: 4px;
 ```
 
   </td>
+  <td>
+  v0.0.0
+  </td>
 </tr>
+
+<tr>
+  <td> submit </td>
+  <td> Submit Button</td>
+  <td> ViewStyle </td>
+  <td>
+
+```css
+margin-top: 4px;
+background-color: #0ea5e9;
+```
+
+  </td>
+  <td>
+  v0.0.2
+  </td>
+</tr>
+
 </table>
 
 #### The layout structure
@@ -293,6 +337,7 @@ margin-top: 4px;
 - Green: `label` / `renderLabel`
 - Cyan: `caption` / `renderCaption`
 - Red: `error` / `renderError`
+- Blue Button `submit` / `renderSubmit` (added on v0.0.2)
 
 ---
 
@@ -323,6 +368,9 @@ const YourApp: React.FC = () => {
         error: {
           backgroundColor: '#e0f2fe',
         },
+        submit: { // added on v0.0.2
+          backgroundColor: '#ef4444',
+        }
       }}
     >
       {/* YOUR COMPONENT*/}
@@ -381,6 +429,7 @@ const YourApp: React.FC = () => {
       label={CustomFormItemLabel}
       caption={CustomFormItemCaption}
       error={CustomFormItemError}
+      submit={<Button color="#06b6d4" title="Custom Submit"} />} // added on v0.0.2
     >
       {/* YOUR COMPONENT*/}
     </NativeFormViewProvider>
@@ -439,6 +488,11 @@ const YourApp: React.FC = () => {
           </Text>
         );
       }}
+      renderSubmit={({ props, formState }) => { // added on v0.0.2
+        return (
+          <Button color="#dc2626" title="Submit" disabled={formState.isSubmitting} />
+        );
+      }}
     >
       {/* YOUR COMPONENT*/}
     </NativeFormViewProvider>
@@ -461,11 +515,18 @@ import { TextInput, View, Text } from "react-native";
 const YourComponent: React.FC = () => {
   const {
     form, // current form context
+    submitHandler, // added on v0.0.2, for form submission
   } = useNativeFormContext();
+
+  // example to add form submission triggering
+  const triggerSubmitAnywhere = () => {
+    form.handleSubmit(submitHandler)
+  }
 
   // do something with the variables above
   return (
     <View>
+      <Button title="Do submission from this component" onPress={triggerSubmitAnywhere}>
     <View>
   );
 };
@@ -532,6 +593,28 @@ import { FormItem } from 'react-native-hook-form-view';
 ---
 
 # Changelog
+
+### 0.0.2
+
+- added `StyledPressable`, `StyleButtonSubmit` component as default component
+- added `Submit` component to ease form submission (previously had to called `formRef.current?.submit()`)
+
+  ```ts
+  import { Submit } from "react-native-hook-form-view"; // import
+
+  // usage
+  <Form onSubmit={onSubmit}>
+    <Submit />
+  </Form>;
+  ```
+
+- enable custom Submit button view & style customization on `NativeFormViewProvider`
+- add `submitHandler` props to `useNativeFormContext` to provide alternative form submission with hooks
+  ```ts
+  // usage with `useNativeFormContext`
+  const { form, submitHandler } = useNativeFormContext();
+  form?.handleSubmit(submitHandler); // call the submit function
+  ```
 
 ### 0.0.1
 
