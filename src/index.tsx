@@ -1,4 +1,3 @@
-export * from "./components/Form";
-export * from "./components/FormItem";
+export * from "./components";
 export * from "./context/NativeFormView";
 export * from "./context/NativeFormContext";
