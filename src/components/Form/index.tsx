@@ -1,19 +1,19 @@
-import React, { forwardRef, useImperativeHandle } from "react";
 import { ViewProps } from "react-native";
-import { useForm, FormProvider } from "react-hook-form";
+import React, { forwardRef, useImperativeHandle } from "react";
+import { useForm, FormProvider, FieldValues } from "react-hook-form";
 import { FallbackView } from "../FallbackView";
 import { NativeFormContextProvider } from "../../context/NativeFormContext";
 import { useNativeFormViewContext } from "../../context/NativeFormView";
 import { StyledFormContainer } from "../../styles";
 import { Props, RefProps } from "./props";
 
-const FormComponentView = <T,>(
-  props: React.PropsWithChildren<Props<T>>,
-  ref: React.ForwardedRef<RefProps<T>>
+const FormComponentView = <T, F extends FieldValues>(
+  props: React.PropsWithChildren<Props<T, F>>,
+  ref: React.ForwardedRef<RefProps<T, F>>
 ) => {
   const { options = {}, children, onSubmit, ...restProps } = props;
 
-  const form = useForm<T>(options);
+  const form = useForm<F, any>(options);
   const views = useNativeFormViewContext();
 
   // Read the formState before render to subscribe the form state through the Proxy
@@ -49,7 +49,7 @@ const FormComponentView = <T,>(
   // ================ VIEWS
   return (
     <FormProvider {...form}>
-      <NativeFormContextProvider<T> form={form}>
+      <NativeFormContextProvider<T, F> form={form}>
         <FallbackView<ViewProps>
           view={views?.container}
           fallbackView={StyledFormContainer}

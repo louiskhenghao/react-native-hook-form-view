@@ -1,5 +1,5 @@
-import { UseFormReturn } from "react-hook-form";
+import { FieldValues, UseFormReturn } from "react-hook-form";
 
-export type ContextProps<T = any> = {
-  form?: UseFormReturn<T>;
+export type ContextProps<T = any, F extends FieldValues = FieldValues> = {
+  form?: UseFormReturn<F, any>;
 };
