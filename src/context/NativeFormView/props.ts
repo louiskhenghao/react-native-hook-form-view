@@ -15,6 +15,7 @@ export type ContextProps = {
   label?: FunctionComponent<any> | any;
   caption?: FunctionComponent<any> | any;
   error?: FunctionComponent<any> | any;
+  submit?: FunctionComponent<any> | any;
 
   // style props
   styles?: {
@@ -23,6 +24,7 @@ export type ContextProps = {
     label?: StyleProp<TextStyle>;
     caption?: StyleProp<TextStyle>;
     error?: StyleProp<TextStyle>;
+    submit?: StyleProp<ViewStyle>;
   };
 
   // view rendering function
@@ -45,5 +47,9 @@ export type ContextProps = {
   renderError?: (context: {
     props: TextProps;
     fieldState: ControllerFieldState;
+  }) => ReactNode;
+  renderSubmit?: (context: {
+    props: ViewProps;
+    formState: FormState<any>;
   }) => ReactNode;
 };
