@@ -1,19 +1,19 @@
-import React, { forwardRef, useImperativeHandle } from "react";
 import { ViewProps } from "react-native";
-import { useForm, FormProvider } from "react-hook-form";
+import React, { forwardRef, useImperativeHandle } from "react";
+import { useForm, FormProvider, FieldValues } from "react-hook-form";
 import { FallbackView } from "../FallbackView";
 import { NativeFormContextProvider } from "../../context/NativeFormContext";
 import { useNativeFormViewContext } from "../../context/NativeFormView";
 import { StyledFormContainer } from "../../styles";
 import { Props, RefProps } from "./props";
 
-const FormComponentView = <T,>(
-  props: React.PropsWithChildren<Props<T>>,
-  ref: React.ForwardedRef<RefProps<T>>
+const FormComponentView = <T, F extends FieldValues>(
+  props: React.PropsWithChildren<Props<T, F>>,
+  ref: React.ForwardedRef<RefProps<T, F>>
 ) => {
   const { options = {}, children, onSubmit, ...restProps } = props;
 
-  const form = useForm<T>(options);
+  const form = useForm<F, any>(options);
   const views = useNativeFormViewContext();
 
   // Read the formState before render to subscribe the form state through the Proxy
@@ -34,7 +34,7 @@ const FormComponentView = <T,>(
   } = form;
 
   // ================ EVENTS
-  const onHandleSubmit = (values: any) => {
+  const onHandleSubmit = (values: F) => {
     onSubmit?.(values);
   };
 
@@ -49,7 +49,9 @@ const FormComponentView = <T,>(
   // ================ VIEWS
   return (
     <FormProvider {...form}>
-      <NativeFormContextProvider<T> form={form}>
+      <NativeFormContextProvider<T, F>
+        form={form}
+        submitHandler={onHandleSubmit}>
         <FallbackView<ViewProps>
           view={views?.container}
           fallbackView={StyledFormContainer}
@@ -81,15 +83,21 @@ const FormComponentView = <T,>(
   );
 };
 
-const FormView = forwardRef(FormComponentView) as <T>(
-  props: React.PropsWithChildren<Props<T>> & {
-    ref?: React.ForwardedRef<RefProps<T>>;
+const FormView = forwardRef(FormComponentView) as <
+  T,
+  F extends FieldValues = FieldValues
+>(
+  props: React.PropsWithChildren<Props<T, F>> & {
+    ref?: React.ForwardedRef<RefProps<T, F>>;
   }
 ) => ReturnType<typeof FormComponentView>;
 
 // ================ EXPORTS
-export type FormProps<T> = Props<T>;
-export type FormRefProps<T = any> = RefProps<T>;
+export type FormProps<T, F extends FieldValues = FieldValues> = Props<T, F>;
+export type FormRefProps<
+  T = any,
+  F extends FieldValues = FieldValues
+> = RefProps<T, F>;
 export const Form = FormView;
 
 export default FormView;
