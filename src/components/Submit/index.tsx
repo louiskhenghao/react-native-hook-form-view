@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { FallbackView } from "../FallbackView";
-import { useNativeFormContext } from "../../context/NativeFormContext";
-import { useNativeFormViewContext } from "../../context/NativeFormView";
 import { StyleButtonSubmit } from "../../styles";
 import { ActionButtonProps } from "../../@types";
+import { useNativeFormContext } from "../../context/NativeFormContext";
+import { useNativeFormViewContext } from "../../context/NativeFormView";
 import { Props } from "./props";
 
 const SubmitButtonView: React.FC<Props> = (props) => {
@@ -12,6 +12,17 @@ const SubmitButtonView: React.FC<Props> = (props) => {
   // ================ HOOKS
   const views = useNativeFormViewContext();
   const { form, submitHandler } = useNativeFormContext();
+  const submit = useCallback(() => {
+    if (!form) {
+      console.error("Form instance is not initialized!");
+      return;
+    }
+    if (!submitHandler) {
+      console.error("Submit handler is not provided!");
+      return;
+    }
+    form.handleSubmit(submitHandler)();
+  }, [form, submitHandler]);
 
   // ================ VARIABLES
   // Read the formState before render to subscribe the form state through the Proxy
@@ -39,20 +50,10 @@ const SubmitButtonView: React.FC<Props> = (props) => {
       fallbackView={StyleButtonSubmit}
       props={{
         ...restProps,
-        title: buttonTitle,
         style: styles?.submit,
+        title: buttonTitle ?? "Submit",
         disabled: isSubmitting,
-        onPress: () => {
-          if (!form) {
-            console.error("Form instance is not initialized!");
-            return;
-          }
-          if (!submitHandler) {
-            console.error("Submit handler is not provided!");
-            return;
-          }
-          form?.handleSubmit(submitHandler);
-        }
+        onPress: submit
       }}
       customRenderView={
         views?.renderSubmit
