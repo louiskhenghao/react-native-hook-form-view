@@ -318,6 +318,8 @@ margin-top: 4px;
 ```css
 margin-top: 4px;
 background-color: #0ea5e9;
+padding-vertical: 12px;
+padding-horizontal: 32px;
 ```
 
   </td>
