@@ -47,7 +47,7 @@ const Example: React.FC = () => {
 
   // create ref
   // NOTE: `formRef` previously used for form submission purpose,
-  // since v0.0.2 can use `Submit` component within `Form`
+  // since v0.0.3 can use `Submit` component within `Form`
   const formRef = useRef<FormRefProps>();
 
   // ======================= EVENTS
@@ -59,7 +59,7 @@ const Example: React.FC = () => {
   return (
     <Form
       // NOTE: `formRef` previously used for form submission purpose,
-      // since v0.0.2 can use `Submit` component within `Form`
+      // since v0.0.3 can use `Submit` component within `Form`
       ref={formRef}
       onSubmit={onSubmit}
     >
@@ -94,7 +94,7 @@ const Example: React.FC = () => {
         onPress={() => formRef.current?.submit()}
       />
 
-      {/* latest usage since v0.0.2 */}
+      {/* latest usage since v0.0.3 */}
       <Submit
         title="Custom Text"
       />
@@ -190,7 +190,7 @@ const SignInForm: React.FC = () => {
         )}
       />
 
-      {/* latest usage since v0.0.2 */}
+      {/* latest usage since v0.0.3 */}
       <Submit />
     </Form>
   );
@@ -324,7 +324,7 @@ padding-horizontal: 32px;
 
   </td>
   <td>
-  v0.0.2
+  v0.0.3
   </td>
 </tr>
 
@@ -339,7 +339,7 @@ padding-horizontal: 32px;
 - Green: `label` / `renderLabel`
 - Cyan: `caption` / `renderCaption`
 - Red: `error` / `renderError`
-- Blue Button `submit` / `renderSubmit` (added on v0.0.2)
+- Blue Button `submit` / `renderSubmit` (added on v0.0.3)
 
 ---
 
@@ -370,7 +370,7 @@ const YourApp: React.FC = () => {
         error: {
           backgroundColor: '#e0f2fe',
         },
-        submit: { // added on v0.0.2
+        submit: { // added on v0.0.3
           backgroundColor: '#ef4444',
         }
       }}
@@ -441,7 +441,7 @@ const YourApp: React.FC = () => {
       label={CustomFormItemLabel}
       caption={CustomFormItemCaption}
       error={CustomFormItemError}
-      submit={CustomSubmitButton} // added on v0.0.2
+      submit={CustomSubmitButton} // added on v0.0.3
     >
       {/* YOUR COMPONENT*/}
     </NativeFormViewProvider>
@@ -500,7 +500,7 @@ const YourApp: React.FC = () => {
           </Text>
         );
       }}
-      renderSubmit={({ props, formState }) => { // added on v0.0.2
+      renderSubmit={({ props, formState }) => { // added on v0.0.3
         return (
           <Button color="#dc2626" title="Submit" disabled={formState.isSubmitting} />
         );
@@ -527,7 +527,7 @@ import { TextInput, View, Text } from "react-native";
 const YourComponent: React.FC = () => {
   const {
     form, // current form context
-    submitHandler, // added on v0.0.2, for form submission
+    submitHandler, // added on v0.0.3, for form submission
   } = useNativeFormContext();
 
   // example to add form submission triggering
@@ -606,7 +606,7 @@ import { FormItem } from 'react-native-hook-form-view';
 
 # Changelog
 
-### 0.0.2
+### 0.0.3
 
 - added `StyledPressable`, `StyleButtonSubmit` component as default component
 - added `Submit` component to ease form submission (previously had to called `formRef.current?.submit()`)
@@ -627,6 +627,10 @@ import { FormItem } from 'react-native-hook-form-view';
   const { form, submitHandler } = useNativeFormContext();
   form?.handleSubmit(submitHandler); // call the submit function
   ```
+
+### 0.0.2
+
+- apply FieldValues types for `Form` & `FormItem` component
 
 ### 0.0.1
 

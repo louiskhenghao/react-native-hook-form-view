@@ -74,8 +74,8 @@ export const StyleButtonSubmit: React.FC<ActionButtonProps> = (props) => {
   const composeStyle = useCallback(
     (stateProps) => {
       const { pressed } = stateProps;
-      const isFunc = typeof style === "function";
-      const applyStyle = isFunc ? style(stateProps) : style;
+      const applyStyle =
+        typeof style === "function" ? style(stateProps) : style;
       return [
         {
           opacity: pressed ? 0.5 : 1,
