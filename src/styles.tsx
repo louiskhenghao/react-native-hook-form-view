@@ -1,4 +1,4 @@
-import { Text } from "react-native";
+import { ActivityIndicator, Text } from "react-native";
 import React, { useCallback } from "react";
 import styled from "styled-components/native";
 import { ActionButtonProps } from "./@types";
@@ -64,7 +64,10 @@ export const StyleButtonSubmit: React.FC<ActionButtonProps> = (props) => {
     title = "Submit",
     style,
     children,
+    loading = false,
     titleStyle,
+    loadingColor = "white",
+    loadingStyle,
     backgroundColor,
     ...restProps
   } = props;
@@ -78,7 +81,7 @@ export const StyleButtonSubmit: React.FC<ActionButtonProps> = (props) => {
         typeof style === "function" ? style(stateProps) : style;
       return [
         {
-          opacity: pressed ? 0.5 : 1,
+          opacity: loading || pressed ? 0.6 : 1,
           backgroundColor: color,
           alignItems: "center",
           justifyContent: "center"
@@ -86,12 +89,19 @@ export const StyleButtonSubmit: React.FC<ActionButtonProps> = (props) => {
         applyStyle
       ];
     },
-    [style]
+    [loading, style]
   );
 
   // ================ VIEWS
   return (
     <StyledPressable style={composeStyle} {...restProps}>
+      {loading && (
+        <ActivityIndicator
+          size="small"
+          color={loadingColor}
+          style={[{ position: "absolute", left: 0, right: 0 }, loadingStyle]}
+        />
+      )}
       {children ?? (
         <Text style={titleStyle ?? { color: "#fff", fontSize: 20 }}>
           {title}
