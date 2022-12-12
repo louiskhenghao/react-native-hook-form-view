@@ -527,12 +527,12 @@ import { TextInput, View, Text } from "react-native";
 const YourComponent: React.FC = () => {
   const {
     form, // current form context
-    submitHandler, // added on v0.0.3, for form submission
+    submit, // added on v0.0.4, for form submission
   } = useNativeFormContext();
 
   // example to add form submission triggering
   const triggerSubmitAnywhere = () => {
-    form.handleSubmit(submitHandler)()
+    submit()
   }
 
   // do something with the variables above
@@ -605,6 +605,23 @@ import { FormItem } from 'react-native-hook-form-view';
 ---
 
 # Changelog
+
+### 0.0.4
+
+- add custom inline style for `style`, `labelStyle`, `captionStyle`, `errorStyle` for `FormItem` component
+- revised v0.0.3 form submission from `useNativeFormContext`, calling `submit` function will trigger for form submission. see below example:
+
+  ```ts
+  // usage in v0.0.3
+  const { form, submitHandler } = useNativeFormContext();
+  form?.handleSubmit(submitHandler); // <-- changed this
+
+  // usage in v0.0.4
+  const { form, submit } = useNativeFormContext();
+  submit(); // <-- to this
+  ```
+
+- add `loading` indicator to `Submit` component, also enable loading indicator custom style with `loadingStyle` & `loadingColor`
 
 ### 0.0.3
 
