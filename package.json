@@ -1,7 +1,7 @@
 {
   "name": "react-native-hook-form-view",
   "description": "React Native Form component that leverage on react-hook-form feature",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "MIT",
   "author": "Louis Loo <louiskhenghao@gmail.com> (https://github.com/louiskhenghao)",
   "homepage": "https://github.com/louiskhenghao/react-native-hook-form-view#readme",
