@@ -7,22 +7,11 @@ import { useNativeFormViewContext } from "../../context/NativeFormView";
 import { Props } from "./props";
 
 const SubmitButtonView: React.FC<Props> = (props) => {
-  const { title, children, style, ...restProps } = props;
+  const { title, loading, children, style, ...restProps } = props;
 
   // ================ HOOKS
   const views = useNativeFormViewContext();
-  const { form, submitHandler } = useNativeFormContext();
-  const submit = useCallback(() => {
-    if (!form) {
-      console.error("Form instance is not initialized!");
-      return;
-    }
-    if (!submitHandler) {
-      console.error("Submit handler is not provided!");
-      return;
-    }
-    form.handleSubmit(submitHandler)();
-  }, [form, submitHandler]);
+  const { form, submit } = useNativeFormContext();
 
   // ================ VARIABLES
   // Read the formState before render to subscribe the form state through the Proxy
@@ -50,9 +39,10 @@ const SubmitButtonView: React.FC<Props> = (props) => {
       fallbackView={StyleButtonSubmit}
       props={{
         ...restProps,
-        style: styles?.submit,
+        loading,
+        style: [styles?.submit, style],
         title: buttonTitle ?? "Submit",
-        disabled: isSubmitting,
+        disabled: loading || isSubmitting,
         onPress: submit
       }}
       customRenderView={
