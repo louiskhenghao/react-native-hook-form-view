@@ -21,6 +21,10 @@ const FormItemView: React.FC<Props> = (props) => {
     rules,
     initialValue,
     children,
+    style,
+    labelStyle,
+    errorStyle,
+    captionStyle,
     render,
     constructErrorMessage
   } = props;
@@ -43,7 +47,7 @@ const FormItemView: React.FC<Props> = (props) => {
     <FallbackView
       view={views?.item}
       fallbackView={StyledFormItemWrapper}
-      props={{ style: styles?.item }}
+      props={{ style: [styles?.item, style] }}
       customRenderView={
         views?.renderItem
           ? (context) =>
@@ -58,7 +62,7 @@ const FormItemView: React.FC<Props> = (props) => {
         <FallbackView
           view={views?.label}
           fallbackView={StyledFormItemLabel}
-          props={{ style: styles?.label }}
+          props={{ style: [styles?.label, labelStyle] }}
           customRenderView={
             views?.renderLabel
               ? (context) =>
@@ -86,7 +90,7 @@ const FormItemView: React.FC<Props> = (props) => {
         <FallbackView
           view={views?.caption}
           fallbackView={StyledFormItemCaption}
-          props={{ style: styles?.caption }}
+          props={{ style: [styles?.caption, captionStyle] }}
           customRenderView={
             views?.renderCaption
               ? (context) =>
@@ -105,7 +109,7 @@ const FormItemView: React.FC<Props> = (props) => {
         <FallbackView
           view={views?.error}
           fallbackView={StyledFormItemError}
-          props={{ style: styles?.error }}
+          props={{ style: [styles?.error, errorStyle] }}
           customRenderView={
             views?.renderError
               ? (context) =>
