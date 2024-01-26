@@ -1,13 +1,16 @@
 import React from "react";
 
-interface Props {
-  [key: string]: any;
-}
+import { CloneElementProps } from "./props";
 
-const CloneElementComponent = (props: Props): any => {
+/**
+ * ===========================
+ * MAIN
+ * ===========================
+ */
+export const CloneElement: React.FC<CloneElementProps> = (props) => {
   const { children, ...restProps } = props;
 
-  // ======================= VIEW
+  // =============== VIEW
   const childrenWithProps = React.Children.map(children, (child: any) => {
     if (!child || typeof child === "boolean") {
       return null;
@@ -18,5 +21,10 @@ const CloneElementComponent = (props: Props): any => {
   return childrenWithProps;
 };
 
-export const CloneElement = CloneElementComponent;
+/**
+ * ===========================
+ * EXPORTS
+ * ===========================
+ */
+export * from "./props";
 export default CloneElement;

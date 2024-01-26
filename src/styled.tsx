@@ -1,4 +1,4 @@
-import { ActivityIndicator, Text } from "react-native";
+import { ActivityIndicator, Text, ViewStyle } from "react-native";
 import React, { useCallback } from "react";
 import styled from "styled-components/native";
 import { ActionButtonProps } from "./@types";
@@ -85,7 +85,7 @@ export const StyleButtonSubmit: React.FC<ActionButtonProps> = (props) => {
           backgroundColor: color,
           alignItems: "center",
           justifyContent: "center"
-        },
+        } as ViewStyle,
         applyStyle
       ];
     },

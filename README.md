@@ -50,12 +50,12 @@ const Example: React.FC = () => {
   // since v0.0.3 can use `Submit` component within `Form`
   const formRef = useRef<FormRefProps>();
 
-  // ======================= EVENTS
+  // =============== EVENTS
   const onSubmit = (values: any) => {
     // do something with `values`
   }
 
-  // ======================= VIEW
+  // =============== VIEW
   return (
     <Form
       // NOTE: `formRef` previously used for form submission purpose,
@@ -161,12 +161,12 @@ const schema = yup.object().shape({
 
 const SignInForm: React.FC = () => {
 
-  // ======================= EVENTS
+  // =============== EVENTS
   const onSubmit = (values: InputPayload) => {
     // do somethoing with `values`
   }
 
-  // ======================= VIEW
+  // =============== VIEW
   return (
     <Form<any, InputPayload>
       options={{
@@ -605,6 +605,11 @@ import { FormItem } from 'react-native-hook-form-view';
 ---
 
 # Changelog
+
+### 0.0.5
+
+- upgrade from React 17 to React 18 & all dependencies
+- add comments to code & update coding practices
 
 ### 0.0.4
 
