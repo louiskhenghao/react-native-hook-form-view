@@ -1,12 +1,17 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { FallbackView } from "../FallbackView";
-import { StyleButtonSubmit } from "../../styles";
+import { StyleButtonSubmit } from "../../styled";
 import { ActionButtonProps } from "../../@types";
 import { useNativeFormContext } from "../../context/NativeFormContext";
 import { useNativeFormViewContext } from "../../context/NativeFormView";
-import { Props } from "./props";
+import { SubmitProps } from "./props";
 
-const SubmitButtonView: React.FC<Props> = (props) => {
+/**
+ * ===========================
+ * MAIN
+ * ===========================
+ */
+export const Submit: React.FC<SubmitProps> = (props) => {
   const { title, loading, children, style, ...restProps } = props;
 
   // ================ HOOKS
@@ -18,14 +23,17 @@ const SubmitButtonView: React.FC<Props> = (props) => {
   // https://react-hook-form.com/api/useform/formstate
   const {
     isDirty = false,
-    dirtyFields = {},
-    isSubmitted = false,
-    isSubmitSuccessful = false,
-    submitCount = 0,
-    touchedFields = {},
+    isValid = true,
+    isLoading = false,
     isSubmitting = false,
     isValidating = false,
-    isValid = true,
+    isSubmitted = false,
+    isSubmitSuccessful = false,
+    disabled = false,
+    submitCount = 0,
+    defaultValues,
+    dirtyFields = {},
+    touchedFields = {},
     errors = {}
   } = form?.formState ?? {};
   const styles = views?.styles;
@@ -36,7 +44,7 @@ const SubmitButtonView: React.FC<Props> = (props) => {
   return (
     <FallbackView<ActionButtonProps>
       view={views?.submit}
-      fallbackView={StyleButtonSubmit}
+      fallback={StyleButtonSubmit}
       props={{
         ...restProps,
         loading,
@@ -52,14 +60,17 @@ const SubmitButtonView: React.FC<Props> = (props) => {
                 props: context,
                 formState: {
                   isDirty,
-                  dirtyFields,
-                  isSubmitted,
-                  isSubmitSuccessful,
-                  submitCount,
-                  touchedFields,
+                  isValid,
+                  isLoading,
                   isSubmitting,
                   isValidating,
-                  isValid,
+                  isSubmitted,
+                  isSubmitSuccessful,
+                  disabled,
+                  submitCount,
+                  defaultValues,
+                  dirtyFields,
+                  touchedFields,
                   errors
                 }
               })
@@ -69,7 +80,10 @@ const SubmitButtonView: React.FC<Props> = (props) => {
   );
 };
 
-export type SubmitProps = Props;
-export const Submit = SubmitButtonView;
-
+/**
+ * ===========================
+ * EXPORTS
+ * ===========================
+ */
+export * from "./props";
 export default Submit;

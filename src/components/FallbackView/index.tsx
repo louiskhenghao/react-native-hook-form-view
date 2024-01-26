@@ -1,28 +1,37 @@
 import React, { createElement } from "react";
-import { CloneElement } from "../CloneElement";
-import { Props } from "./props";
+import { FallbackViewProps } from "./props";
 
-export const FallbackView = <T,>(
-  props: React.PropsWithChildren<Props<T>>
+/**
+ * ===========================
+ * MAIN
+ * ===========================
+ */
+export const FallbackView = <T extends any = any>(
+  props: FallbackViewProps<T>
 ): any => {
   const {
     view,
     children,
-    fallbackView,
+    fallback,
     props: viewProps,
     customRenderView
   } = props;
 
-  // ======================= VIEW
-  if (!view && !fallbackView && !customRenderView) return null;
+  // =============== VIEW
+  if (!view && !fallback && !customRenderView) return null;
   if (customRenderView) {
     return <>{customRenderView({ ...viewProps, children })}</>;
   }
-  if (view) return <>{createElement(view, viewProps, children)}</>;
-  if (!fallbackView && children) return <CloneElement>{children}</CloneElement>;
-  if (!fallbackView) return null;
-  return <>{createElement(fallbackView, viewProps, children)}</>;
+  if (view) return <>{createElement(view as any, viewProps, children)}</>;
+  if (!fallback && children) return children;
+  if (!fallback) return null;
+  return <>{createElement(fallback as any, viewProps, children)}</>;
 };
 
-export type FallbackViewProps<T> = Props<T>;
+/**
+ * ===========================
+ * EXPORTS
+ * ===========================
+ */
+export * from "./props";
 export default FallbackView;

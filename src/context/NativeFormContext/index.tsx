@@ -5,16 +5,23 @@ import React, {
   useCallback,
   useContext
 } from "react";
-import { ContextProps, ContextHookProps } from "./props";
+import { NativeFormContextProps, NativeFormContextHookProps } from "./props";
 
-export const NativeFormContext = createContext<ContextProps<any, any>>({});
+/**
+ * ===========================
+ * MAIN
+ * ===========================
+ */
+export const NativeFormContext = createContext<
+  NativeFormContextProps<any, any>
+>({});
 
 export const useNativeFormContext = <
   T,
   F extends FieldValues = FieldValues
->(): ContextHookProps<T, F> => {
+>(): NativeFormContextHookProps<T, F> => {
   // ================ HOOKS
-  const context = useContext<ContextProps<T, F>>(NativeFormContext);
+  const context = useContext<NativeFormContextProps<T, F>>(NativeFormContext);
   if (!context) {
     throw new Error(
       `useNativeFormContext must be used inside a NativeFormContextProvider.`
@@ -42,7 +49,7 @@ export const NativeFormContextProvider = <
   T,
   F extends FieldValues = FieldValues
 >(
-  props: React.PropsWithChildren<ContextProps<T, F>>
+  props: React.PropsWithChildren<NativeFormContextProps<T, F>>
 ): ReactElement => {
   const { children, ...restProps } = props;
   return (
@@ -52,5 +59,10 @@ export const NativeFormContextProvider = <
   );
 };
 
-export type NativeFormContextProps<T> = ContextProps<T>;
+/**
+ * ===========================
+ * EXPORTS
+ * ===========================
+ */
+export * from "./props";
 export default NativeFormContext;

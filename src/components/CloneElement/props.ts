@@ -1,15 +1,15 @@
-import { ActionButtonProps } from "../../@types";
-
 /**
  * ===========================
  * MAIN
  * ===========================
  */
-export type SubmitProps = ActionButtonProps;
+export type CloneElementProps = {
+  [key: string]: any;
+};
 
 /**
  * ===========================
  * EXPORTS
  * ===========================
  */
-export default SubmitProps;
+export default CloneElementProps;

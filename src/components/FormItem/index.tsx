@@ -8,10 +8,15 @@ import {
   StyledFormItemLabel,
   StyledFormItemCaption,
   StyledFormItemError
-} from "../../styles";
-import { Props } from "./props";
+} from "../../styled";
+import { FormItemViewProps } from "./props";
 
-const FormItemView: React.FC<Props> = (props) => {
+/**
+ * ===========================
+ * MAIN
+ * ===========================
+ */
+export const FormItem: React.FC<FormItemViewProps> = (props) => {
   const {
     label,
     name,
@@ -46,7 +51,7 @@ const FormItemView: React.FC<Props> = (props) => {
   return (
     <FallbackView
       view={views?.item}
-      fallbackView={StyledFormItemWrapper}
+      fallback={StyledFormItemWrapper}
       props={{ style: [styles?.item, style] }}
       customRenderView={
         views?.renderItem
@@ -61,7 +66,7 @@ const FormItemView: React.FC<Props> = (props) => {
       {label && (
         <FallbackView
           view={views?.label}
-          fallbackView={StyledFormItemLabel}
+          fallback={StyledFormItemLabel}
           props={{ style: [styles?.label, labelStyle] }}
           customRenderView={
             views?.renderLabel
@@ -89,7 +94,7 @@ const FormItemView: React.FC<Props> = (props) => {
       {caption && (
         <FallbackView
           view={views?.caption}
-          fallbackView={StyledFormItemCaption}
+          fallback={StyledFormItemCaption}
           props={{ style: [styles?.caption, captionStyle] }}
           customRenderView={
             views?.renderCaption
@@ -108,7 +113,7 @@ const FormItemView: React.FC<Props> = (props) => {
       {!!error && (
         <FallbackView
           view={views?.error}
-          fallbackView={StyledFormItemError}
+          fallback={StyledFormItemError}
           props={{ style: [styles?.error, errorStyle] }}
           customRenderView={
             views?.renderError
@@ -126,7 +131,10 @@ const FormItemView: React.FC<Props> = (props) => {
   );
 };
 
-export type FormItemProps<T = any> = Props<T>;
-export const FormItem = FormItemView;
-
+/**
+ * ===========================
+ * EXPORTS
+ * ===========================
+ */
+export * from "./props";
 export default FormItem;

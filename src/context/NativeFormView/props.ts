@@ -9,7 +9,12 @@ import {
   PressableProps
 } from "react-native";
 
-export type ContextProps = {
+/**
+ * ===========================
+ * MAIN
+ * ===========================
+ */
+export type NativeFormViewContextProps = {
   // view props
   container?: FunctionComponent<any> | any;
   item?: FunctionComponent<any> | any;
@@ -54,3 +59,10 @@ export type ContextProps = {
     formState: FormState<any>;
   }) => ReactNode;
 };
+
+/**
+ * ===========================
+ * EXPORTS
+ * ===========================
+ */
+export default NativeFormViewContextProps;
