@@ -6,9 +6,7 @@ import { FallbackViewProps } from "./props";
  * MAIN
  * ===========================
  */
-export const FallbackView = <T extends any = any>(
-  props: FallbackViewProps<T>
-): any => {
+export const FallbackView = <T = any,>(props: FallbackViewProps<T>): any => {
   const {
     view,
     children,

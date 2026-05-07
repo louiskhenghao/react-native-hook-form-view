@@ -10,17 +10,20 @@ export const NativeFormViewContext = createContext<NativeFormViewContextProps>(
   {}
 );
 
-export const useNativeFormViewContext = (): NativeFormViewContextProps | null => {
-  const context = useContext<NativeFormViewContextProps>(NativeFormViewContext);
-  if (!context) {
-    return null;
-  }
-  return context;
-};
+export const useNativeFormViewContext =
+  (): NativeFormViewContextProps | null => {
+    const context = useContext<NativeFormViewContextProps>(
+      NativeFormViewContext
+    );
+    if (!context) {
+      return null;
+    }
+    return context;
+  };
 
-export const NativeFormViewProvider: React.FC<PropsWithChildren<
-  NativeFormViewContextProps
->> = (props) => {
+export const NativeFormViewProvider: React.FC<
+  PropsWithChildren<NativeFormViewContextProps>
+> = (props) => {
   const { children, ...restProps } = props;
 
   // ================ VIEWS

@@ -10,6 +10,7 @@ import {
   StyledFormItemError
 } from "../../styled";
 import { FormItemViewProps } from "./props";
+import { TextProps, ViewProps } from "react-native";
 
 /**
  * ===========================
@@ -49,7 +50,7 @@ export const FormItem: React.FC<FormItemViewProps> = (props) => {
 
   // ================ VIEWS
   return (
-    <FallbackView
+    <FallbackView<ViewProps>
       view={views?.item}
       fallback={StyledFormItemWrapper}
       props={{ style: [styles?.item, style] }}
@@ -64,7 +65,7 @@ export const FormItem: React.FC<FormItemViewProps> = (props) => {
       }>
       {/* ====== LABEL */}
       {label && (
-        <FallbackView
+        <FallbackView<TextProps>
           view={views?.label}
           fallback={StyledFormItemLabel}
           props={{ style: [styles?.label, labelStyle] }}
@@ -92,7 +93,7 @@ export const FormItem: React.FC<FormItemViewProps> = (props) => {
 
       {/* ====== CAPTION */}
       {caption && (
-        <FallbackView
+        <FallbackView<TextProps>
           view={views?.caption}
           fallback={StyledFormItemCaption}
           props={{ style: [styles?.caption, captionStyle] }}
@@ -111,7 +112,7 @@ export const FormItem: React.FC<FormItemViewProps> = (props) => {
 
       {/* ====== ERROR */}
       {!!error && (
-        <FallbackView
+        <FallbackView<TextProps>
           view={views?.error}
           fallback={StyledFormItemError}
           props={{ style: [styles?.error, errorStyle] }}

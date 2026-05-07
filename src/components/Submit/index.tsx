@@ -34,7 +34,9 @@ export const Submit: React.FC<SubmitProps> = (props) => {
     defaultValues,
     dirtyFields = {},
     touchedFields = {},
-    errors = {}
+    errors = {},
+    isReady = false,
+    validatingFields = {}
   } = form?.formState ?? {};
   const styles = views?.styles;
   const isChildrenString = typeof children === "string";
@@ -71,7 +73,9 @@ export const Submit: React.FC<SubmitProps> = (props) => {
                   defaultValues,
                   dirtyFields,
                   touchedFields,
-                  errors
+                  errors,
+                  isReady,
+                  validatingFields
                 }
               })
           : undefined

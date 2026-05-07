@@ -89,7 +89,7 @@ export const StyleButtonSubmit: React.FC<ActionButtonProps> = (props) => {
         applyStyle
       ];
     },
-    [loading, style]
+    [color, loading, style]
   );
 
   // ================ VIEWS
