@@ -1,5 +1,11 @@
 # React Native Hook Form View
 
+> ## 📢 Maintenance Mode
+>
+> This package is still **fully usable**, but it is **no longer the latest implementation**. It will continue to receive version updates (maintenance & dependency upgrades), however **no new features will be added**.
+>
+> 👉 For the new implementation, please head over to **[Formzk](https://louiskhenghao.github.io/formzk/)**.
+
 This component is high level component that leverage features of [react-hook-form](https://react-hook-form.com/). The objective of this component is to helps developer to create form in React Native/Web easily.
 
 **Highlight**
@@ -584,23 +590,9 @@ Checkout the example as it shown all available props
 
 # Future Roadmap
 
-In near future, will support more preset input from React Native by default. Ideally just passing `type` as one of the props from `FormItem`.
+This package is now in **maintenance mode** — it will continue to receive version updates (maintenance & dependency upgrades), but **no new features will be added**.
 
-```TypeScript
-import { FormItem } from 'react-native-hook-form-view';
-
-<FormItem type="input" name="firstName" />
-<FormItem type="date" name="dob" />
-<FormItem type="textarea" name="description" />
-```
-
-- [ ] TextInput
-- [ ] DateInput
-- [ ] Checkbox
-- [ ] TextArea
-- [ ] Switch
-- [ ] Fields definition with Object
-- etc
+All new feature development has moved to the new implementation: **[Formzk](https://louiskhenghao.github.io/formzk/)**. Please check it out if you're starting a new project or looking for the features previously planned here.
 
 ---
 
