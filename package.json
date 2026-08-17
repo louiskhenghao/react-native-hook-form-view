@@ -41,7 +41,7 @@
     ]
   },
   "dependencies": {
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.5.3"
   },
   "peerDependencies": {
     "react": ">=18 <20",
@@ -52,24 +52,24 @@
     "@commitlint/cli": "^19.0.0",
     "@commitlint/config-conventional": "^19.0.0",
     "@react-native/eslint-config": "^0.85.3",
-    "@types/react": "^18.2.79",
+    "@types/react": "^18.3.31",
     "@types/react-native": "^0.73.0",
-    "@typescript-eslint/eslint-plugin": "^8.59.2",
-    "@typescript-eslint/parser": "^8.59.2",
-    "commitizen": "^4.3.1",
-    "concurrently": "^8.2.0",
+    "@typescript-eslint/eslint-plugin": "^8.67.0",
+    "@typescript-eslint/parser": "^8.67.0",
+    "commitizen": "^4.3.2",
+    "concurrently": "^8.2.2",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.9.0",
-    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-prettier": "^5.5.6",
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "husky": "^9.1.0",
     "lint-staged": "^15.2.0",
-    "prettier": "^3.3.0",
-    "react-hook-form": "^7.75.0",
-    "typescript": "^5.5.0"
+    "prettier": "^3.9.6",
+    "react-hook-form": "^7.85.0",
+    "typescript": "^5.9.3"
   }
 }
