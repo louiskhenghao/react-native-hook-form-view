@@ -598,6 +598,15 @@ All new feature development has moved to the new implementation: **[Formzk](http
 
 # Changelog
 
+### 0.0.7
+
+- package enters maintenance mode: still usable and will receive version updates, but no new features (checkout [Formzk](https://louiskhenghao.github.io/formzk/) for the new implementation)
+- update dependencies to latest compatible versions
+
+### 0.0.6
+
+- upgrade react & react native dependencies to accommodate newer metro
+
 ### 0.0.5
 
 - upgrade from React 17 to React 18 & all dependencies
